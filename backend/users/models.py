@@ -29,7 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=200, unique=True)
     email = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=255, blank=True)
-    following = models.ManyToManyField("self",symmetrical=False,related_name="followed" ,blank=True)
+    following = models.ManyToManyField("self", symmetrical=False, related_name="followed", blank=True)
     bio = models.CharField(max_length=255, blank=True)
     avatar = models.ImageField(default='user.png')
     cover_image = models.ImageField(default='cover.png')
