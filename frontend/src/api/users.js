@@ -1,7 +1,7 @@
 import { api } from "./useAxios";
 import { jwtDecode } from "jwt-decode";
 
-export const login = async (data) => {
+export const loginReq = async (data) => {
     const res = await api.post('/users/login/', data);
     const { access, refresh } = res.data;
 
@@ -10,6 +10,14 @@ export const login = async (data) => {
 
     const user = jwtDecode(localStorage.getItem('access'));
     localStorage.setItem('username', user.username);
-    localStorage.setItem('id', user.id);
+    localStorage.setItem('user_id', user.id);
     localStorage.setItem('avatar', user.avatar);
+};
+
+export const registerReq = async (data) => {
+    await api.post('/users/register/', data);
+};
+
+export const logoutReq = () => {
+    localStorage.clear();
 };
