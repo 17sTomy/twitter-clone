@@ -4,18 +4,23 @@ import LoginPage from './pages/LoginPage';
 import Feed from './pages/Feed';
 import Register from './pages/Register';
 import UserProfile from './pages/UserProfile';
+import Layout from './components/Layout';
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Feed />} />
-          <Route path="/:username" element={<UserProfile />} />
+
+        <Route path='/' element={<Layout/>}>
+          <Route element={<PrivateRoute/>}>
+            <Route path="/" element={<Feed/>} />
+            <Route path="/:username" element={<UserProfile/>} />
+          </Route>
         </Route>
+
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register/>} />
+
       </Routes>
     </BrowserRouter>
   )
