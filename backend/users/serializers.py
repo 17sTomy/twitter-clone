@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'avatar', 'bio', 'cover_image',
-                  'date_joined', 'i_follow', 'followers', 'following', 'name']
+                  'date_joined', 'i_follow', 'followers', 'following', 'name', 'followed_usernames']
         
     def get_i_follow(self, obj):
         current_user = self.context.get('request').user
@@ -24,6 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
     
     def get_following(self, obj):
         return obj.following.count()
+    
+    def get_followed_usernames(self, obj): 
+        return obj.followed_usernames
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod

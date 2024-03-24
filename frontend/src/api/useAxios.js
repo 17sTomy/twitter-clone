@@ -19,8 +19,6 @@ authAxios.interceptors.request.use(async (config) => {
     'Authorization': `Bearer ${access}`,
   };
 
-  console.log(access);
-
   const decoded = jwtDecode(access);
 
   const exp = new Date(decoded.exp * 1000);
@@ -41,7 +39,6 @@ authAxios.interceptors.request.use(async (config) => {
       window.location.href = '/login';
     }
   } else {
-    console.log("hola");
     return config;
   };
 

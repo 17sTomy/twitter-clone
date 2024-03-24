@@ -1,6 +1,10 @@
 import { api, authAxios } from "./useAxios";
 import { jwtDecode } from "jwt-decode";
 
+export const updateProfile = async (data) => {
+    await authAxios.put(`/users/${localStorage.getItem('username')}/`, data);
+};
+
 export const userProfile = async (username) => {
     const res = await authAxios.get(`/users/${username}/`);
     return res.data;
