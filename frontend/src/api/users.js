@@ -1,5 +1,10 @@
-import { api } from "./useAxios";
+import { api, authAxios } from "./useAxios";
 import { jwtDecode } from "jwt-decode";
+
+export const userProfile = async (username) => {
+    const res = await authAxios.get(`/users/${username}/`);
+    return res.data;
+};
 
 export const loginReq = async (data) => {
     const res = await api.post('/users/login/', data);

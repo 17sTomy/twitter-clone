@@ -7,7 +7,15 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import IsAuthenticated
 
 from . models import User
-from . serializers import MyTokenObtainPairSerializer, MyUserSerializer
+from . serializers import MyTokenObtainPairSerializer, MyUserSerializer, UserSerializer
+from backend.permissions import IsUserOrReadOnly
+
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsUserOrReadOnly]
+    lookup_field = 'username'
+    lookup_url_kwarg = 'username'
 
 class MyTokenObtainPairSerializer(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
