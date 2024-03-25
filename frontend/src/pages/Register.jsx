@@ -13,7 +13,6 @@ const Register = () => {
       mutationFn: registerReq,
       onSuccess: () => {
         navigate("/");
-        console.log("registerMutation succesful");
         navigate("/login");
       },
       onError: (error) => {
@@ -38,6 +37,7 @@ const Register = () => {
             <Formik
               initialValues={{
                 email: '',
+                name: '',
                 username: '',
                 password: '',
               }}
@@ -46,41 +46,10 @@ const Register = () => {
               }}
             >
               <Form>
-                <Field id='email' name='email' placeholder='Email'
-                  className="
-                  border-b-[1px] 
-                  border-neutral-800 
-                  w-full
-                  p-5 
-                  cursor-pointer 
-                  my-3
-                  bg-transparent outline-neutral-800 
-                  "
-                />
-
-                <Field id='username' name='username' placeholder='Username'
-                  className="
-                  border-b-[1px] 
-                  border-neutral-800 
-                  w-full
-                  p-5 
-                  cursor-pointer 
-                  my-3
-                  bg-transparent outline-neutral-800 
-                  "
-                />
-  
-                <Field type='password' id='password' name='password' placeholder='*******' 
-                  className="
-                  my-3
-                  border-b-[1px] 
-                  border-neutral-800 
-                  w-full
-                  p-5 
-                  cursor-pointer 
-                  bg-transparent outline-neutral-800 
-                  "
-                />
+                <Field id='email' name='email' placeholder='Email' className="border-b-[1px] border-neutral-800 w-full p-5 cursor-pointer my-3 bg-transparent outline-neutral-800" />
+                <Field id='name' name='name' placeholder='Name' className="border-b-[1px] border-neutral-800 w-full p-5 cursor-pointer my-3 bg-transparent outline-neutral-800" />
+                <Field id='username' name='username' placeholder='Username' className="border-b-[1px] border-neutral-800 w-full p-5 cursor-pointer my-3 bg-transparent outline-neutral-800" />
+                <Field type='password' id='password' name='password' placeholder='*******'className="border-b-[1px] border-neutral-800 w-full p-5 cursor-pointer my-3 bg-transparent outline-neutral-800" />
                 <button type='submit' className="bg-sky-400 my-2 w-full hover:bg-sky-500 p-2 px-5 rounded-full text-white font-bold">
                   Sign up
                 </button>

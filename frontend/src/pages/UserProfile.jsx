@@ -65,7 +65,10 @@ const UserProfile = () => {
               Edit Profile
             </button>
           ) : (
-            <FollowBtn user={user} page={true}/>
+            <button 
+              className="bg-sky-500 mr-7 text-white font-semibold rounded-full px-7 py-3 mt-3 ml-3 hover:bg-sky-600 transition">
+              Follow
+            </button>
           )}
         </div>
       </div>

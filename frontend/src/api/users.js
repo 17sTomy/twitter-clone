@@ -1,6 +1,11 @@
 import { api, authAxios } from "./useAxios";
 import { jwtDecode } from "jwt-decode";
 
+export const searchUser = async (query) => {
+    const res = await authAxios.get(`/users/u/search/?query=${query}`);
+    return res.data;
+};
+
 export const updateProfile = async (data) => {
     await authAxios.put(`/users/${localStorage.getItem('username')}/`, data);
 };
@@ -29,4 +34,6 @@ export const registerReq = async (data) => {
 
 export const logoutReq = () => {
     localStorage.clear();
+    window.location.href = "http://localhost:5173/login";
+
 };
