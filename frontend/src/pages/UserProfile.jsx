@@ -3,15 +3,19 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { userProfile } from "../api/users";
 import Loader from "../components/Loader";
-import {
-  AiOutlineArrowLeft,
-} from "react-icons/ai";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoMdCalendar } from "react-icons/io";
 import { Link } from "react-router-dom";
 import EditProfile from "../components/EditProfile";
+import MyTweets from "../components/MyTweets";
+import MyRetweets from "../components/MyRetweets";
+import MyMedia from "../components/MyMedia";
+import MyLikes from "../components/MyLikes";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [show, setShow] = useState(0);
+
   const { username } = useParams();
   const myUser = localStorage.getItem('username');
 
@@ -88,30 +92,22 @@ const UserProfile = () => {
       </div>
 
       <div className="border-b-[1px] border-neutral-800 grid grid-cols-4 gap-4">
-        <button 
-          onClick={() => setShow(0)}
-          className="p-5 cursor-pointer hover:bg-neutral-900 transition">
+        <button onClick={() => setShow(0)} className="p-5 cursor-pointer hover:bg-neutral-900 transition">
           Tweets
         </button>
-        <button  
-          onClick={() => setShow(1)}
-          className="p-5 cursor-pointer hover:bg-neutral-900 transition">
+        <button onClick={() => setShow(1)} className="p-5 cursor-pointer hover:bg-neutral-900 transition">
           Retweets
         </button>
-        <button  
-          onClick={() => setShow(2)}
-          className="p-5 cursor-pointer hover:bg-neutral-900 transition">
+        <button onClick={() => setShow(2)} className="p-5 cursor-pointer hover:bg-neutral-900 transition">
           Media
         </button>
-        <button  
-          onClick={() => setShow(3)}
-          className="p-5 cursor-pointer hover:bg-neutral-900 transition">
+        <button onClick={() => setShow(3)} className="p-5 cursor-pointer hover:bg-neutral-900 transition">
           Likes
         </button>
       </div>
 
       {/* {show === 0 && <MyTweets user={user} tweets={tweets} myUser={myUser} />}
-      {show === 1 && <MyRe user={user} />}
+      {show === 1 && <MyRetweets user={user} />}
       {show === 2 && <MyMedia tweets={tweets} />}
       {show === 3 && <MyLikes user={user} />} */}
     </>

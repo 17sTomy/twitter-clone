@@ -1,1 +1,1 @@
-# Twitter Clone
+# Twitter Clone with React.js and Django REST Framework

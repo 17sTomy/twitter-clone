@@ -57,33 +57,20 @@ const EditProfile = ({ user, close }) => {
                   id='bio' name='bio'
                   onChange={formik.handleChange} value={formik.values.bio}
                   placeholder='About you'
-                  className="
-                  border-b-[1px] 
-                  border-neutral-800 
-                  w-full
-                  p-5 
-                  cursor-pointer 
-                  my-3
-                  bg-transparent outline-neutral-800 
-                  "
+                  className="border-b-[1px] border-neutral-800 w-full p-5  cursor-pointer  my-3 bg-transparent outline-neutral-800  "
                 />
                 <input placeholder='Your Name'
                   id='name' name='name'
                   onChange={formik.handleChange} value={formik.values.name}
-                  className="
-                  border-b-[1px] 
-                  border-neutral-800 
-                  w-full
-                  p-5 
-                  cursor-pointer 
-                  my-3
-                  bg-transparent outline-neutral-800 
-                  "
+                  className="border-b-[1px] border-neutral-800 w-full p-5  cursor-pointer  my-3 bg-transparent outline-neutral-800  "
                 />
+                Profile Image: 
                 <input 
                   className="my-4"
                   type="file" name="avatar" onChange={(event) => formik.setFieldValue("avatar", event.currentTarget.files[0])} 
                 />
+                <br />
+                Profile Cover: 
                 <input 
                   className="my-3"
                   type="file" name="cover_image" onChange={(event) => formik.setFieldValue("cover_image", event.currentTarget.files[0])} 
