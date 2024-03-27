@@ -1,6 +1,11 @@
 import { api, authAxios } from "./useAxios";
 import { jwtDecode } from "jwt-decode";
 
+export const recoUsers = async () => {
+    const res = await authAxios.get('users/reco/');
+    return res.data;
+};
+
 export const searchUser = async (query) => {
     const res = await authAxios.get(`/users/u/search/?query=${query}`);
     return res.data;

@@ -12,10 +12,18 @@ from backend.permissions import IsUserOrReadOnly
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def reco(request):
+    users = User.objects.exclude(username=request.user.username)
+    users = users.exclude(id__in=request.user.following.all())[:5]
+    serializer = SearchSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def search(request):
     query = request.query_params.get('query', None)
     if query is not None:
-        users = User.objects.filter(username__icontains=query)
+        users = User.objects.filter(username__icontains=query).exclude(id=request.user.id)
         serializer = SearchSerializer(users, many=True)
         return Response({'users': serializer.data})
     else:

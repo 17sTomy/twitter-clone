@@ -27,9 +27,7 @@ const Register = () => {
         <div className='m-5 p-10 bg-grey-3'>
           <div className="w-[300px]  max-w-md space-y-8 md:w-[400px] lg:w-[400px]">
             <div >
-              <BsTwitter
-                className="mx-auto text-sky-500 h-12 w-12"
-              />
+              <BsTwitter className="mx-auto text-sky-500 h-12 w-12" />
               <h2 className="mt-6 text-center text-3xl text-grey">
                 Join Twitter today
               </h2>
