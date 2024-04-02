@@ -10,6 +10,19 @@ from . models import User
 from . serializers import MyTokenObtainPairSerializer, MyUserSerializer, UserSerializer, SearchSerializer
 from backend.permissions import IsUserOrReadOnly
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def follow(request, username):
+    me = request.user
+    user = User.objects.get(username=username)
+
+    if user in me.following.all():
+        me.following.remove(user)
+        return Response({'detail': 'Unfollowed'})
+    else:
+        me.following.add(user)
+        return Response({'detail': 'Followed'})
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def reco(request):

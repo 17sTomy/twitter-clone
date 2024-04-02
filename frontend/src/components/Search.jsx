@@ -71,7 +71,7 @@ const Search = () => {
         <h4 className="font-bold text-xl px-4">Who to follow</h4>
           {users && users.map((user) => (
             <div className="hover:bg-white hover:bg-opacity-[0.03] px-4 py-2 cursor-pointer transition duration-200 ease-out flex items-center">
-              <img src={`http://127.0.0.1:8000${user.avatar}`} width={50} height={50} objectFit="cover" className="rounded-full" />
+              <img src={`http://127.0.0.1:8000${user.avatar}`} width={50} height={50} objectfit="cover" className="rounded-full" />
               <div className="ml-4 leading-5 group">
                 <h4 className="font-bold group-hover:underline">
                   <Link to={`/${user.username}`}>{user.username}</Link>

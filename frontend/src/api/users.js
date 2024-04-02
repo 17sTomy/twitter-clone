@@ -1,8 +1,12 @@
 import { api, authAxios } from "./useAxios";
 import { jwtDecode } from "jwt-decode";
 
+export const follow = async (username) => {
+    await authAxios.post(`/users/follow/${username}/`);
+};
+
 export const recoUsers = async () => {
-    const res = await authAxios.get('users/reco/');
+    const res = await authAxios.get('/users/reco/');
     return res.data;
 };
 

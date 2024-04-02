@@ -3,6 +3,7 @@ from . import views
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
+    path('follow/<str:username>/', views.follow),
     path('u/search/', views.search),
     path('reco/', views.reco),
     path('register/', views.register),
