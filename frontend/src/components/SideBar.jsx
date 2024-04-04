@@ -8,15 +8,11 @@ import SidebarLink from "./SidebarLink";
 import { useQuery } from "@tanstack/react-query";
 // import { getNoLeidas } from "../api/noti";
 import { useNavigate } from "react-router-dom";
+import { logoutReq } from "../api/users";
 
 const SideBar = () => {
   const username = localStorage.getItem('username');
   const nav = useNavigate();
-
-  function logout() {
-    localStorage.clear();
-    nav('/login');
-  };
 
   // const { data } = useQuery({
   //   queryKey: ["notiNoLei"],
@@ -33,7 +29,7 @@ const SideBar = () => {
         {/* <SidebarLink link='/noti'text="Notifications" num={data?.length} Icon={<IoIosNotificationsOutline size={28}/>} /> */}
         <button 
         className="ml-1 rounded-full text-xl p-4 flex text-slate-200 hover:bg-blue-300 hover:bg-opacity-10 cursor-pointer"
-        onClick={logout}>
+        onClick={logoutReq}>
           <BiLogOutCircle size={28}/>
         </button>
       </div>

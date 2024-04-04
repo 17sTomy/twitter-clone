@@ -23,7 +23,7 @@ export const userProfile = async (username) => {
     const res = await authAxios.get(`/users/${username}/`);
     return res.data;
 };
-
+ 
 export const loginReq = async (data) => {
     const res = await api.post('/users/login/', data);
     const { access, refresh } = res.data;
@@ -44,5 +44,4 @@ export const registerReq = async (data) => {
 export const logoutReq = () => {
     localStorage.clear();
     window.location.href = "http://localhost:5173/login";
-
 };
