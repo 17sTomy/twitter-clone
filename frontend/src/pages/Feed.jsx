@@ -11,10 +11,10 @@ const Feed = () => {
   const { ref, inView } = useInView()
 
   const { data, isLoading, isError, error, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ['tweets'],
-    queryFn: getTweets,
-    getNextPageParam: (lastPage) => lastPage.meta.next
-  }
+      queryKey: ['tweets'],
+      queryFn: getTweets,
+      getNextPageParam: (lastPage) => lastPage.meta.next
+    }
   );
 
   useEffect(() => {
