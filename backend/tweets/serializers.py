@@ -19,6 +19,7 @@ class MyTweetSerializer(serializers.ModelSerializer):
     
 class TweetSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
+    name = serializers.ReadOnlyField(source='user.name')
     avatar = serializers.ReadOnlyField(source='user.avatar.url')
     likes_count = serializers.SerializerMethodField(read_only=True)
     retweets_count = serializers.SerializerMethodField(read_only=True)
@@ -27,7 +28,7 @@ class TweetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweet
-        fields = ['__all__']
+        fields = '__all__'
 
     def get_avatar(self, obj):
         return obj.user.avatar.url

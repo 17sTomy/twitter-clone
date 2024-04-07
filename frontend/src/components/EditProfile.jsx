@@ -1,4 +1,4 @@
-import { useQueryClient, useMutation } from "@tanstack/react-query"
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { updateProfile } from "../api/users";
 import toast from "react-hot-toast";
