@@ -12,6 +12,7 @@ import MyRetweets from "../components/MyRetweets";
 import MyMedia from "../components/MyMedia";
 import MyLikes from "../components/MyLikes";
 import toast from "react-hot-toast";
+import FollowBtn from "../components/FollowBtn";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -25,16 +26,6 @@ const UserProfile = () => {
   const { data: user, isLoading: loadingUser, isError: isErrorUser, error: errorUser } = useQuery({
     queryKey: ['user', username],
     queryFn: () => userProfile(username),
-  });
-
-  const followMutation = useMutation({
-    mutationFn: follow,
-    onSuccess: () => {
-      queryClient.invalidateQueries(['user', username]);
-    },
-    onError: () => {
-      toast.error(error.message);
-    }
   });
 
   if (loadingUser) return <Loader />
@@ -78,21 +69,7 @@ const UserProfile = () => {
               Edit Profile
             </button>
           ) : (
-            <>
-              {user.i_follow ? (
-                <button
-                  onClick={() => followMutation.mutate(user.username)} 
-                  className="bg-sky-500 mr-7 text-white font-semibold rounded-full px-7 py-3 mt-3 ml-3 hover:bg-sky-600 transition">
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  onClick={() => followMutation.mutate(user.username)} 
-                  className="bg-sky-500 mr-7 text-white font-semibold rounded-full px-7 py-3 mt-3 ml-3 hover:bg-sky-600 transition">
-                  Follow
-                </button>
-              )}
-            </>
+            <FollowBtn user={user} page={true} />
           )}
         </div>
       </div>
