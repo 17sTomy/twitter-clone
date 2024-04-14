@@ -1,5 +1,10 @@
 import { authAxios } from "./useAxios";
 
+export const getUserTweets = async (username) => {
+    const response = await authAxios.get(`/tweets/my-tweets/${username}/`);
+    return response.data;
+};
+
 export const addTweet = async (data) => {
     await authAxios.post("/tweets/", data);
 };

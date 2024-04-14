@@ -1,11 +1,20 @@
-import { useState } from "react";
 import Loader from "./Loader";
 import { BsFillTrashFill } from "react-icons/bs";
 import toast from "react-hot-toast";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { AiOutlineMessage, AiFillEdit } from "react-icons/ai";
+import { getUserTweets } from "../api/tweets";
 
 const MyTweets = ({ user, myUser }) => {
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["tweets", user.username],
+    queryFn: () => getUserTweets(user.username),
+  });
+
+  if (isLoading) return <Loader/>
+  if (isError) return toast.error(error.message)
+
   return (
     <>
       {data.map && data.map(t => (
@@ -15,37 +24,37 @@ const MyTweets = ({ user, myUser }) => {
             <div>
               <div className="flex flex-row items-center gap-2">
                 <p className="text-white font-semibold cursor-pointer hover:underline">
-                  {t.user}
+                  {user.name}
                 </p>
                 <span className="text-neutral-500 text-sm">
                   {new Date(t.created_at).toDateString().slice(4)}
                 </span>
               </div>
                 <span className="text-neutral-500 cursor-pointer hover:underline hidden md:block">
-                  @{t.user}
+                  @{user.username}
                 </span>
-              <div className="text-white mt-1 text-start">
+              <div className="text-white mt-1 mb-3 text-start">
                 {t.content}
               </div>
-                <img src={t.image}/>
+              {t.image && <img src={`http://127.0.0.1:8000${t.image}`}/>}
               <div className="flex flex-row items-center mt-3 gap-10">
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-sky-500">
                   <AiOutlineMessage size={20} />
-                  <p>{t.parent.length}</p>
+                  {/* <p>{t.parent.length}</p> */}
                 </div>
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-green-500">
-                  <Rt t={t} user={userId}/>
+                  {/* <Rt t={t} user={userId}/> */}
                   <p>
                       {t.retweets_count}
                   </p>
                 </div>
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
-                  <Like t={t} user={userId} />
+                  {/* <Like t={t} user={userId} /> */}
                   <p>
                     {t.likes_count}
                   </p>
                 </div>
-                {myUser === user.username && (
+                {/* {myUser === user.username && (
                   <>
                     <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
                       <BsFillTrashFill onClick={() => deleteTweetMutation.mutate(t.id)} size={20} />
@@ -57,7 +66,7 @@ const MyTweets = ({ user, myUser }) => {
                       <EditTweet tweet={t} close={() => setIsEditing(false)} />
                     )}
                   </> 
-                )}
+                )} */}
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { userProfile, follow } from "../api/users";
 import Loader from "../components/Loader";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -20,8 +20,6 @@ const UserProfile = () => {
 
   const { username } = useParams();
   const myUser = localStorage.getItem('username');
-
-  const queryClient = useQueryClient();
 
   const { data: user, isLoading: loadingUser, isError: isErrorUser, error: errorUser } = useQuery({
     queryKey: ['user', username],
@@ -110,8 +108,8 @@ const UserProfile = () => {
         </button>
       </div>
 
-      {/* {show === 0 && <MyTweets user={user} tweets={tweets} myUser={myUser} />}
-      {show === 1 && <MyRetweets user={user} />}
+      {show === 0 && <MyTweets user={user} myUser={myUser} />}
+      {/* {show === 1 && <MyRetweets user={user} />}
       {show === 2 && <MyMedia tweets={tweets} />}
       {show === 3 && <MyLikes user={user} />} */}
     </>
