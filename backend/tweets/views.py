@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from . models import Tweet, Comment
 from users.models import User
 from . serializers import TweetSerializer, MyTweetSerializer, CommentSerializer
-from backend.permissions import IsUserOrReadOnly
+from .permissions import IsUserOrReadOnly
 from backend.pagination import CustomPagination
 
 @api_view(['GET'])

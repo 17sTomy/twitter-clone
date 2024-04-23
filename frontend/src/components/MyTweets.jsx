@@ -1,17 +1,35 @@
+import { useState } from "react";
 import Loader from "./Loader";
 import { BsFillTrashFill } from "react-icons/bs";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AiOutlineMessage, AiFillEdit } from "react-icons/ai";
-import { getUserTweets } from "../api/tweets";
+import { getUserTweets, editTweet, deleteTweet } from "../api/tweets";
+import EditTweet from "./EditTweet";
 
 const MyTweets = ({ user, myUser }) => {
+  const [editTweet, setEditTweet] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const queryClient = useQueryClient();
+
+  const deleteTweetMutation = useMutation({
+    mutationFn: deleteTweet,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["tweets", user.username])
+      toast.success("Tweet deleted")
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    }
+  });
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["tweets", user.username],
     queryFn: () => getUserTweets(user.username),
   });
 
+  if (deleteTweetMutation.isLoading) return <Loader/>
   if (isLoading) return <Loader/>
   if (isError) return toast.error(error.message)
 
@@ -44,17 +62,19 @@ const MyTweets = ({ user, myUser }) => {
                 </div>
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-green-500">
                   {/* <Rt t={t} user={userId}/> */}
+                  {/* <Rt /> */}
                   <p>
                       {t.retweets_count}
                   </p>
                 </div>
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
                   {/* <Like t={t} user={userId} /> */}
+                  {/* <Like /> */}
                   <p>
                     {t.likes_count}
                   </p>
                 </div>
-                {/* {myUser === user.username && (
+                {myUser === user.username && (
                   <>
                     <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
                       <BsFillTrashFill onClick={() => deleteTweetMutation.mutate(t.id)} size={20} />
@@ -66,7 +86,7 @@ const MyTweets = ({ user, myUser }) => {
                       <EditTweet tweet={t} close={() => setIsEditing(false)} />
                     )}
                   </> 
-                )} */}
+                )}
               </div>
             </div>
           </div>
