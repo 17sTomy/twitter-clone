@@ -1,5 +1,13 @@
 import { authAxios } from "./useAxios";
 
+export const retweetTweet = async (id) => {
+    await authAxios.post(`/tweets/retweet/${id}/`);
+};
+
+export const likeTweet = async (id) => {
+    await authAxios.post(`/tweets/like/${id}/`);
+};
+
 export const deleteTweet = async (id) => {
     await authAxios.delete(`/tweets/${id}`);
 };

@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import Loader from '../components/Loader';
 import { toast } from "react-hot-toast";
 import AddTweet from "../components/AddTweet";
+import Like from "../components/Like";
+import Retweet from "../components/Retweet";
 
 const Feed = () => {
   const { ref, inView } = useInView()
@@ -78,14 +80,10 @@ const Feed = () => {
                           </p>
                         </div>
                         <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-green-500">
-                            {/* <Rt t={t}/> */}
-                          <p>
-                            {t.retweets_count}
-                          </p>
+                          <Retweet t={t} />
                         </div>
                         <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
-                          {/* <Like t={t}/> */}
-                          <p>{t.likes_count}</p>
+                          <Like t={t} />
                         </div>
                       </div>
                     </div>

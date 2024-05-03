@@ -6,6 +6,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AiOutlineMessage, AiFillEdit } from "react-icons/ai";
 import { getUserTweets, editTweet, deleteTweet } from "../api/tweets";
 import EditTweet from "./EditTweet";
+import Like from "./Like";
+import Retweet from "./Retweet";
 
 const MyTweets = ({ user, myUser }) => {
   const [editTweet, setEditTweet] = useState(false);
@@ -61,18 +63,10 @@ const MyTweets = ({ user, myUser }) => {
                   {/* <p>{t.parent.length}</p> */}
                 </div>
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-green-500">
-                  {/* <Rt t={t} user={userId}/> */}
-                  {/* <Rt /> */}
-                  <p>
-                      {t.retweets_count}
-                  </p>
+                  <Retweet t={t} />
                 </div>
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500">
-                  {/* <Like t={t} user={userId} /> */}
-                  {/* <Like /> */}
-                  <p>
-                    {t.likes_count}
-                  </p>
+                  <Like t={t} />
                 </div>
                 {myUser === user.username && (
                   <>

@@ -5,16 +5,36 @@ from rest_framework.response import Response
 
 from . models import Tweet, Comment
 from users.models import User
-from . serializers import TweetSerializer, MyTweetSerializer, CommentSerializer
+from . serializers import TweetSerializer, CommentSerializer
 from .permissions import IsUserOrReadOnly
 from backend.pagination import CustomPagination
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def like(request, pk):
+    tweet = Tweet.objects.get(pk=pk)
+    if request.user in tweet.liked.all():
+        tweet.liked.remove(request.user)
+    else:
+        tweet.liked.add(request.user)
+    return Response({ 'status': 'ok' });
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def retweet(request, pk):
+    tweet = Tweet.objects.get(pk=pk)
+    if request.user in tweet.retweeted.all():
+        tweet.retweeted.remove(request.user)
+    else:
+        tweet.retweeted.add(request.user)
+    return Response({ 'status': 'ok' });
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_tweets(request, username):
     user = User.objects.get(username=username)
     tweets = Tweet.objects.filter(user=user)
-    serializer = MyTweetSerializer(tweets, many=True)
+    serializer = TweetSerializer(tweets, many=True, context={'request': request})
     return Response(serializer.data)
 
 class TweetList(generics.ListCreateAPIView):
