@@ -5,6 +5,7 @@ import Feed from './pages/Feed';
 import Register from './pages/Register';
 import UserProfile from './pages/UserProfile';
 import Layout from './components/Layout';
+import OneTweet from './pages/OneTweet';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route element={<PrivateRoute/>}>
             <Route path="/" element={<Feed/>} />
             <Route path="/:username" element={<UserProfile/>} />
+            <Route path="/tweet/:id" element={<OneTweet/>} />
           </Route>
         </Route>
 
