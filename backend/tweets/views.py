@@ -31,6 +31,22 @@ def retweet(request, pk):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def get_user_retweets(request, username):
+    user = User.objects.get(username=username)
+    tweets = Tweet.objects.filter(retweeted=user)
+    serializer = TweetSerializer(tweets, many=True, context={'request': request})
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_likes(request, username):
+    user = User.objects.get(username=username)
+    tweets = Tweet.objects.filter(liked=user)
+    serializer = TweetSerializer(tweets, many=True, context={'request': request})
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_user_tweets(request, username):
     user = User.objects.get(username=username)
     tweets = Tweet.objects.filter(user=user)

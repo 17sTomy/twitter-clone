@@ -4,15 +4,13 @@ import { BsFillTrashFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { AiOutlineMessage, AiFillEdit } from "react-icons/ai";
-import { getUserTweets, editTweet, deleteTweet } from "../api/tweets";
+import { getUserTweets, deleteTweet } from "../api/tweets";
 import EditTweet from "./EditTweet";
 import Like from "./Like";
 import Retweet from "./Retweet";
 
 const MyTweets = ({ user, myUser }) => {
-  const [editTweet, setEditTweet] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
   const queryClient = useQueryClient();
 
   const deleteTweetMutation = useMutation({
@@ -56,7 +54,7 @@ const MyTweets = ({ user, myUser }) => {
               <div className="text-white mt-1 mb-3 text-start">
                 {t.content}
               </div>
-              {t.image && <img src={`http://127.0.0.1:8000${t.image}`}/>}
+              {t.image && <img src={t.image}/>}
               <div className="flex flex-row items-center mt-3 gap-10">
                 <div className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-sky-500">
                   <AiOutlineMessage size={20} />

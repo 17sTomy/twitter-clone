@@ -11,22 +11,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def get_avatar(self, obj):
         return obj.user.avatar.url
-
-# class MyTweetSerializer(serializers.ModelSerializer):
-#     likes_count = serializers.SerializerMethodField(read_only=True)
-#     retweets_count = serializers.SerializerMethodField(read_only=True)
-
-#     class Meta:
-#         model = Tweet
-#         fields = '__all__'
-
-#     def get_likes_count(self, obj):
-#         user = self.context['request'].user
-#         print("Usuario que hizo la solicitud:", user)
-#         return obj.liked.all().count()
-
-#     def get_retweets_count(self, obj):
-#         return obj.retweeted.all().count()
     
 class TweetSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
@@ -51,7 +35,7 @@ class TweetSerializer(serializers.ModelSerializer):
         return obj.retweeted.all().count()
 
     def get_iliked(self, obj):
-        return True if self.context['request'].user in obj.liked.all() else False
+        return self.context['request'].user in obj.liked.all()
 
     def get_iretweeted(self, obj):
-        return True if self.context['request'].user in obj.retweeted.all() else False
+        return self.context['request'].user in obj.retweeted.all() 

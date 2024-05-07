@@ -23,13 +23,12 @@ const OneTweet = () => {
     <>
       <div className="border-b-[1px] border-neutral-800 p-5 cursor-pointer hover:bg-neutral-900 transition">
           <div className="flex flex-row items-start gap-3">
-
             <img className="h-11 w-11 rounded-full" src={`http://127.0.0.1:8000${tweet.avatar}`} />
             <div>
               <div className="flex flex-row items-center gap-2">
                 <p className="text-white font-semibold cursor-pointer hover:underline">
                   <Link to={`${tweet.user}`}>
-                  {tweet.user}
+                  {tweet.name}
                   </Link>
                 </p>
                 <span className="text-neutral-500 cursor-pointer hover:underline hidden md:block">

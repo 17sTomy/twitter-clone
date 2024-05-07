@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { userProfile, follow } from "../api/users";
+import { userProfile } from "../api/users";
 import Loader from "../components/Loader";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { IoMdCalendar } from "react-icons/io";
@@ -11,8 +11,8 @@ import MyTweets from "../components/MyTweets";
 import MyRetweets from "../components/MyRetweets";
 import MyMedia from "../components/MyMedia";
 import MyLikes from "../components/MyLikes";
-import toast from "react-hot-toast";
 import FollowBtn from "../components/FollowBtn";
+import { getUserTweets } from "../api/tweets";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,8 +26,16 @@ const UserProfile = () => {
     queryFn: () => userProfile(username),
   });
 
+  const { data: tweets, isLoading: loadingTweets, isError: isErrorTweets, error: errorTweets } = useQuery({
+    queryKey: ['user_tweets'],
+    queryFn: () => getUserTweets(username),
+  })
+
   if (loadingUser) return <Loader />
   if (isErrorUser) return <div>Error: {errorUser.message}</div>
+
+  if(loadingTweets) return <Loader />
+  if(isErrorTweets) return <div>Error: {errorTweets.message}</div>
 
   return (
     <>
@@ -109,9 +117,9 @@ const UserProfile = () => {
       </div>
 
       {show === 0 && <MyTweets user={user} myUser={myUser} />}
-      {/* {show === 1 && <MyRetweets user={user} />}
+      {show === 1 && <MyRetweets user={user} />}
       {show === 2 && <MyMedia tweets={tweets} />}
-      {show === 3 && <MyLikes user={user} />} */}
+      {show === 3 && <MyLikes user={user} />} 
     </>
   );
 };

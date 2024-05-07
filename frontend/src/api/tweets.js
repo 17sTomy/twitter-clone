@@ -1,4 +1,14 @@
 import { authAxios } from "./useAxios";
+ 
+export const getUserLikes = async (username) => {
+    const response = await authAxios.get(`/tweets/likes/${username}`);
+    return response.data;
+};
+
+export const getUserRetweets = async (username) => {
+    const response = await authAxios.get(`/tweets/retweets/${username}`, '');
+    return response.data;
+};
 
 export const getTweet = async (id) => {
     const response = await authAxios.get(`/tweets/${id}/`);
