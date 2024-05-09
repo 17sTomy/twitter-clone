@@ -9,4 +9,6 @@ urlpatterns = [
     path('my-tweets/<str:username>/', views.get_user_tweets),
     path('likes/<str:username>/', views.get_user_likes),
     path('retweets/<str:username>/', views.get_user_retweets),
+    path('comments/<int:pk>/', views.CommentListCreate.as_view()),
+    path('comments/delete/<int:pk>/', views.CommentDelete.as_view()),
 ]

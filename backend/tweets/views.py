@@ -9,6 +9,28 @@ from . serializers import TweetSerializer, CommentSerializer
 from .permissions import IsUserOrReadOnly
 from backend.pagination import CustomPagination
 
+class CommentDelete(generics.DestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated, IsUserOrReadOnly]
+
+class CommentListCreate(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, pk):
+        tweet = Tweet.objects.get(pk=pk)
+        return tweet
+    
+    def create(self, request, pk):
+        tweet = self.get_object(pk)
+        data = request.data
+        comment = Comment(user=request.user, body=data['body'], tweet=tweet)
+        comment.save()
+        serializer = CommentSerializer(comment, many=False)
+        return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def like(request, pk):

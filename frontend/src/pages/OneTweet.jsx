@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 import toast from 'react-hot-toast';
 import Retweet from '../components/Retweet';
 import Like from '../components/Like';
-// import Comments from '../components/Comments';
+import Comments from '../components/Comments';
 
 const OneTweet = () => {
   const { id } = useParams();
@@ -57,7 +57,7 @@ const OneTweet = () => {
             </div>
           </div>
         </div>
-      {/* <Comments tweet={tweet} /> */}
+      <Comments tweet={tweet} />
     </>
   );
 };

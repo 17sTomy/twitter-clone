@@ -7,7 +7,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        field = '__all__'
+        fields = '__all__'
 
     def get_avatar(self, obj):
         return obj.user.avatar.url
