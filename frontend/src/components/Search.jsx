@@ -1,5 +1,5 @@
 import { SearchIcon } from "@heroicons/react/outline";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "./Loader";
 import toast from "react-hot-toast";

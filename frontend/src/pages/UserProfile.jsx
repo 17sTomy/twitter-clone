@@ -116,7 +116,7 @@ const UserProfile = () => {
         </button>
       </div>
 
-      {show === 0 && <MyTweets user={user} myUser={myUser} />}
+      {show === 0 && <MyTweets user={user} />}
       {show === 1 && <MyRetweets user={user} />}
       {show === 2 && <MyMedia tweets={tweets} />}
       {show === 3 && <MyLikes user={user} />} 

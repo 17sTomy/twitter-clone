@@ -1,6 +1,7 @@
 import { AiFillHeart } from "react-icons/ai";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import { likeTweet } from "../api/tweets";
 
 const Like = ({ t }) => {
@@ -12,7 +13,7 @@ const Like = ({ t }) => {
       queryClient.invalidateQueries("tweets");
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
     },
   });
 

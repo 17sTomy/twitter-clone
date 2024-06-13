@@ -14,7 +14,6 @@ const Comments = ({ tweet }) => {
     queryFn: () => getComments(tweet.id)
   });
 
-  console.log(tweet.id);
   console.log(comments);
 
   const deleteCommentMutation = useMutation({
@@ -27,8 +26,6 @@ const Comments = ({ tweet }) => {
       toast.error(error.message);
     }
   });
-
-  console.log(comments);
 
   if (isLoading) return <Loader />
   if (isError) return toast.error(error.message)

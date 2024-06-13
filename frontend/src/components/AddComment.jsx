@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import Loader from "./Loader"
+import toast from "react-hot-toast";
 import { useFormik } from "formik";
 import { addComment } from "../api/tweets"
 
@@ -13,7 +14,7 @@ const AddComment = ({ tweet }) => {
       queryClient.invalidateQueries('comments')
     },
     onError: (error) => {
-      console.log(error)
+      toast.error(error.message);
     }
   });
 

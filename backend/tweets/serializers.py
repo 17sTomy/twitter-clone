@@ -20,6 +20,7 @@ class TweetSerializer(serializers.ModelSerializer):
     retweets_count = serializers.SerializerMethodField(read_only=True)
     iliked = serializers.SerializerMethodField(read_only=True)
     iretweeted = serializers.SerializerMethodField(read_only=True)
+    comments_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Tweet
@@ -39,3 +40,6 @@ class TweetSerializer(serializers.ModelSerializer):
 
     def get_iretweeted(self, obj):
         return self.context['request'].user in obj.retweeted.all() 
+    
+    def get_comments_count(self, obj): 
+        return obj.comment_set.count()

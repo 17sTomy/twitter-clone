@@ -1,5 +1,5 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
@@ -7,7 +7,6 @@ from . models import Tweet, Comment
 from users.models import User
 from . serializers import TweetSerializer, CommentSerializer
 from .permissions import IsUserOrReadOnly
-from backend.pagination import CustomPagination
 
 class CommentDelete(generics.DestroyAPIView):
     queryset = Comment.objects.all()
@@ -18,6 +17,10 @@ class CommentListCreate(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        tweet_id = self.kwargs['pk']
+        return Comment.objects.filter(tweet_id=tweet_id)
 
     def get_object(self, pk):
         tweet = Tweet.objects.get(pk=pk)
@@ -79,7 +82,6 @@ class TweetList(generics.ListCreateAPIView):
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = CustomPagination
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Formik, Field, Form } from 'formik';
+import toast from "react-hot-toast";
 import { BsTwitter } from 'react-icons/bs';
 import { loginReq } from '../api/users';
 
@@ -17,7 +18,7 @@ const LoginPage = () => {
         navigate("/");
       },
       onError: (error) => {
-        console.log(error);
+        toast.error(error.message);
       }
     });
 

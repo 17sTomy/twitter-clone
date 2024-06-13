@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Formik, Field, Form } from 'formik';
+import toast from "react-hot-toast";
 import { BsTwitter } from 'react-icons/bs';
 import { registerReq } from '../api/users';
 
@@ -16,7 +17,7 @@ const Register = () => {
         navigate("/login");
       },
       onError: (error) => {
-        console.log(error);
+        toast.error(error.message);
       }
     });
 
