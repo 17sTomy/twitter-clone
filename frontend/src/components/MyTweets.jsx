@@ -30,7 +30,7 @@ const MyTweets = ({ user }) => {
   return (
     <>
       {data.map && data.map(t => (
-        <Tweet key={t.id} t={t} />
+        <Tweet key={t.id} deleteTweetMutation={deleteTweetMutation} t={t} />
       ))}
     </>
   );

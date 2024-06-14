@@ -45,7 +45,7 @@ def search(request):
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsUserOrReadOnly]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'username'
     lookup_url_kwarg = 'username'
 
