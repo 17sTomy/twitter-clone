@@ -1,7 +1,7 @@
 # Twitter Clone with React.js and Django REST Framework
 
 ## Description
-This is a Twitter clone built using React.js for the frontend and Django REST Framework for the backend. It also utilizes Tailwind CSS for styling and React Query for data fetching and state management.
+This is a Twitter clone built using React.js for the frontend and Django REST Framework for the backend. It also utilizes Tailwind CSS for styling, React Query for data fetching and state management, and JWT for authentication.
 
 ![Twitter Clone Preview](frontend/src/assets/preview.gif)
 
@@ -14,6 +14,7 @@ This is a Twitter clone built using React.js for the frontend and Django REST Fr
 - Follow and unfollow users
 - Edit profile
 - Search for users
+- Authentication with JWT
 
 ## Installation
 Follow these steps to set up the ChatApp on your local machine:
